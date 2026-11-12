@@ -156,7 +156,7 @@
   });
   $('audience').addEventListener('click',()=>{
     if(audienceWindow && !audienceWindow.closed){audienceWindow.focus();send();return;}
-    const url=new URL(location.href);url.search='screen=1';url.hash='';
+    const url=new URL(location.href);url.search='screen=1&v=3';url.hash='';
     audienceWindow=window.open(url.href,'workshop-audience','popup,width=1280,height=800');
     if(!audienceWindow)announce('청중 창이 차단되었습니다. 팝업을 허용해 주세요.');
   });
