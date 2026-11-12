@@ -5,51 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>대담 사진</title>
-  <link rel="stylesheet" href="style.css?v=3">
-  <script src="photos.js?v=3" defer></script>
-  <script src="sound.js?v=3" defer></script>
-  <script src="app.js?v=3" defer></script>
+  <link rel="stylesheet" href="style.css?v=4">
+  <script src="photos.js?v=4" defer></script>
+  <script src="sound.js?v=4" defer></script>
+  <script src="app.js?v=4" defer></script>
 </head>
 <body>
-  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <symbol id="icon-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
-    <symbol id="icon-screen" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="1"/><path d="M8 21h8m-4-5v5"/></symbol>
-    <symbol id="icon-photo" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m3 17 6-6 5 5 3-3 4 4"/><circle cx="16" cy="8" r="1"/></symbol>
-    <symbol id="icon-sound" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
-    <symbol id="icon-mute" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4Zm5 5 6 6m0-6-6 6"/></symbol>
-    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m5 5 14 14M5 19 19 5"/></symbol>
-    <symbol id="icon-zoom" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></symbol>
-    <symbol id="icon-back" viewBox="0 0 24 24"><path d="m9 5-7 7 7 7M2 12h20"/></symbol>
-  </svg>
   <main>
     <h1 class="sr-only">대담 사진</h1>
-    <div class="operator selector">
+    <div class="selector">
       <h2 class="sr-only">사진 선택</h2>
       <div id="topics" class="topics"></div>
-      <div id="scene-buttons" class="scene-buttons"></div>
+      <button id="previous" class="arrow previous" aria-label="이전 사진" title="이전 사진"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
+      <button id="next" class="arrow next" aria-label="다음 사진" title="다음 사진"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8"/></svg></button>
     </div>
     <div id="stage" class="stage">
       <h2 id="scene-title" class="sr-only" tabindex="-1"></h2>
       <div id="photos" class="photos"></div>
     </div>
-    <div class="operator tools">
-        <h2 class="sr-only">화면 설정</h2>
-        <button id="sound" class="icon-button" aria-label="효과음" aria-pressed="true" title="효과음 끄기"><svg aria-hidden="true"><use href="#icon-sound"/></svg></button>
-        <button id="audience" class="icon-button" aria-label="청중 화면 열기" title="청중 화면"><svg aria-hidden="true"><use href="#icon-screen"/></svg></button>
-        <button id="clean" class="icon-button" aria-label="사진만 보기" title="사진만 보기"><svg aria-hidden="true"><use href="#icon-photo"/></svg></button>
-        <button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><svg aria-hidden="true"><use href="#icon-fullscreen"/></svg></button>
-    </div>
     <p id="status" class="sr-only" role="status"></p>
   </main>
-  <button id="restore" class="icon-button floating" aria-label="키워드 선택으로" title="키워드 선택" hidden><svg aria-hidden="true"><use href="#icon-back"/></svg></button>
-  <div id="screen-tools" class="screen-tools" hidden><button id="screen-fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><svg aria-hidden="true"><use href="#icon-fullscreen"/></svg></button></div>
   <dialog id="image-dialog" aria-labelledby="image-title">
     <h2 id="image-title" class="sr-only" tabindex="-1"></h2>
     <div id="image-scroll" class="image-scroll" tabindex="0" aria-label="확대한 사진"><img id="large-image" alt=""></div>
-    <div class="image-toolbar">
-      <button id="zoom" class="icon-button" aria-label="확대" aria-pressed="false" title="확대"><svg aria-hidden="true"><use href="#icon-zoom"/></svg></button>
-      <button id="close-image" class="icon-button" aria-label="사진 닫기" title="닫기"><svg aria-hidden="true"><use href="#icon-close"/></svg></button>
-    </div>
+    <button id="close-image" class="close">닫기</button>
   </dialog>
   <noscript>사진을 보려면 JavaScript를 켜 주세요.</noscript>
 </body>
