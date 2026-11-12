@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>대담 사진</title>
-  <link rel="stylesheet" href="style.css?v=2">
-  <script src="photos.js?v=2" defer></script>
-  <script src="sound.js?v=2" defer></script>
-  <script src="app.js?v=2" defer></script>
+  <link rel="stylesheet" href="style.css?v=3">
+  <script src="photos.js?v=3" defer></script>
+  <script src="sound.js?v=3" defer></script>
+  <script src="app.js?v=3" defer></script>
 </head>
 <body>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -23,28 +23,33 @@
   </svg>
   <main>
     <h1 class="sr-only">대담 사진</h1>
-    <div id="stage" class="stage"><div id="photos" class="photos"></div></div>
-    <div class="operator dock">
+    <div class="operator selector">
+      <h2 class="sr-only">사진 선택</h2>
       <div id="topics" class="topics"></div>
       <div id="scene-buttons" class="scene-buttons"></div>
-      <div class="tools">
+    </div>
+    <div id="stage" class="stage">
+      <h2 id="scene-title" class="sr-only" tabindex="-1"></h2>
+      <div id="photos" class="photos"></div>
+    </div>
+    <div class="operator tools">
+        <h2 class="sr-only">화면 설정</h2>
         <button id="sound" class="icon-button" aria-label="효과음" aria-pressed="true" title="효과음 끄기"><svg aria-hidden="true"><use href="#icon-sound"/></svg></button>
         <button id="audience" class="icon-button" aria-label="청중 화면 열기" title="청중 화면"><svg aria-hidden="true"><use href="#icon-screen"/></svg></button>
         <button id="clean" class="icon-button" aria-label="사진만 보기" title="사진만 보기"><svg aria-hidden="true"><use href="#icon-photo"/></svg></button>
         <button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><svg aria-hidden="true"><use href="#icon-fullscreen"/></svg></button>
-      </div>
     </div>
     <p id="status" class="sr-only" role="status"></p>
   </main>
   <button id="restore" class="icon-button floating" aria-label="키워드 선택으로" title="키워드 선택" hidden><svg aria-hidden="true"><use href="#icon-back"/></svg></button>
   <div id="screen-tools" class="screen-tools" hidden><button id="screen-fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면"><svg aria-hidden="true"><use href="#icon-fullscreen"/></svg></button></div>
   <dialog id="image-dialog" aria-labelledby="image-title">
-    <h2 id="image-title" class="sr-only"></h2>
+    <h2 id="image-title" class="sr-only" tabindex="-1"></h2>
+    <div id="image-scroll" class="image-scroll" tabindex="0" aria-label="확대한 사진"><img id="large-image" alt=""></div>
     <div class="image-toolbar">
       <button id="zoom" class="icon-button" aria-label="확대" aria-pressed="false" title="확대"><svg aria-hidden="true"><use href="#icon-zoom"/></svg></button>
-      <button id="close-image" class="icon-button" aria-label="사진 닫기" title="닫기" autofocus><svg aria-hidden="true"><use href="#icon-close"/></svg></button>
+      <button id="close-image" class="icon-button" aria-label="사진 닫기" title="닫기"><svg aria-hidden="true"><use href="#icon-close"/></svg></button>
     </div>
-    <div id="image-scroll" class="image-scroll" tabindex="0" aria-label="확대한 사진"><img id="large-image" alt=""></div>
   </dialog>
   <noscript>사진을 보려면 JavaScript를 켜 주세요.</noscript>
 </body>

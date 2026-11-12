@@ -4,7 +4,7 @@
   const $ = id => document.getElementById(id);
   const isAudience = new URLSearchParams(location.search).get('screen') === '1';
   const origin = location.protocol === 'file:' ? '*' : location.origin;
-  const messageType = 'school-workshop-photos-v2';
+  const messageType = 'school-workshop-photos-v3';
   let state = {topic:0,scene:0,photo:null,zoom:false,scroll:[0,0]};
   let audienceWindow = null;
   let lastImageTrigger = 0;
@@ -61,16 +61,21 @@
   const topicButtons=topics.map((topic,index)=>{
     const button=document.createElement('button');button.textContent=topic.label;
     button.setAttribute('aria-pressed','false');
-    button.addEventListener('click',()=>update({topic:index,scene:0,photo:null,zoom:false}));
+    button.addEventListener('click',()=>selectScene(index,0));
     $('topics').append(button);return button;
   });
+  function selectScene(topic,scene) {
+    update({topic,scene,photo:null,zoom:false});
+    $('scene-title').focus({preventScroll:true});
+  }
   function move(delta) {
     const next=state.scene+delta;
-    if(next>=0 && next<topics[state.topic].scenes.length) update({scene:next,photo:null,zoom:false});
+    if(next>=0 && next<topics[state.topic].scenes.length) selectScene(state.topic,next);
   }
   function render() {
     revision++;
     const scene=currentScene();
+    $('scene-title').textContent=`${topics[state.topic].label}, ${scene.title}`;
     topicButtons.forEach((button,index)=>button.setAttribute('aria-pressed',String(index===state.topic)));
     const oldFocus=$('scene-buttons').contains(document.activeElement)||$('photos').contains(document.activeElement);
     if(oldFocus && state.photo===null) {
@@ -79,31 +84,29 @@
     }
     $('photos').replaceChildren();$('scene-buttons').replaceChildren();
     scene.photos.forEach((photo,index)=>{
-      const button=document.createElement('button');button.className='photo-button';
+      const item=document.createElement('div');item.className='photo';
+      const heading=document.createElement('h3');heading.className='sr-only';heading.textContent=photo.caption;
       const img=new Image();img.src=photo.src;img.alt=photo.alt;
       img.addEventListener('error',()=>announce('사진을 불러오지 못했습니다.'));
-      button.append(img);
-      if(scene.compare) {
-        const label=document.createElement('span');label.className='comparison-label';
-        label.textContent=index===0?'전':'후';label.setAttribute('aria-hidden','true');button.append(label);
-      }
+      const button=document.createElement('button');button.className='photo-open';
+      button.setAttribute('aria-label',`${photo.caption} 크게 보기`);button.title='크게 보기';
       button.addEventListener('click',()=>{lastImageTrigger=index;update({photo:index,zoom:false});});
-      $('photos').append(button);
+      item.append(heading,img,button);$('photos').append(item);
     });
     if(topics[state.topic].scenes.length>1) topics[state.topic].scenes.forEach((item,index)=>{
       const button=document.createElement('button');button.setAttribute('aria-label',item.title);
       button.title=item.title;button.setAttribute('aria-pressed',String(index===state.scene));
       for(const photo of item.photos) {const img=new Image();img.src=photo.src;img.alt='';button.append(img);}
-      button.addEventListener('click',()=>{update({scene:index,photo:null,zoom:false});$('scene-buttons').children[index].focus();});
+      button.addEventListener('click',()=>selectScene(state.topic,index));
       $('scene-buttons').append(button);
     });
-    announce(`${topics[state.topic].label}, ${scene.title}, ${state.scene+1}/${topics[state.topic].scenes.length}`);
+    announce(`장면 ${state.scene+1}/${topics[state.topic].scenes.length}, 사진 ${scene.photos.length}장`);
     if(state.photo!==null) {
       const photo=scene.photos[state.photo];
       $('large-image').src=photo.src;$('large-image').alt=photo.alt;$('image-title').textContent=photo.caption;
       $('zoom').setAttribute('aria-pressed',String(state.zoom));$('zoom').title=state.zoom?'화면에 맞추기':'확대';
       $('image-scroll').classList.toggle('zoomed',state.zoom);
-      if(!$('image-dialog').open) {$('image-dialog').showModal();$('image-scroll').scrollTop=0;}
+      if(!$('image-dialog').open) {$('image-dialog').showModal();$('image-scroll').scrollTop=0;$('image-title').focus({preventScroll:true});}
       if(isAudience) {$('large-image').onload=restoreScroll;requestAnimationFrame(restoreScroll);}
     } else if($('image-dialog').open) {closingFromState=true;$('image-dialog').close();}
   }
@@ -169,8 +172,8 @@
     if($('image-dialog').open)return;
     if(event.key==='Escape' && document.body.classList.contains('clean')){clean(false);return;}
     if(!event.altKey || event.ctrlKey || event.metaKey || isAudience)return;
-    const digit=event.code.match(/^Digit([1-5])$/)?.[1];
-    if(digit){event.preventDefault();update({topic:Number(digit)-1,scene:0,photo:null,zoom:false});}
+    const digit=event.code.match(/^Digit([1-3])$/)?.[1];
+    if(digit){event.preventDefault();selectScene(Number(digit)-1,0);}
     else if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();move(event.key==='ArrowRight'?1:-1);}
   });
   if(isAudience){
