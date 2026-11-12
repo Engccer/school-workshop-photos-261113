@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="함께 일하는 학교의 이야기. 신명중학교의 편의지원 사진으로 함께 보는 대담 자료.">
+  <title>함께 일하는 학교의 이야기 | 대담 사진</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="photos.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="operator topbar">
+    <div><p class="eyebrow">장애인교원·관리자 사례 대담</p><h1>함께 일하는 학교의 이야기</h1></div>
+    <div class="tools"><button id="audience">청중 화면 열기</button><button id="fullscreen">전체 화면</button><button id="help">사용 안내</button></div>
+  </header>
+  <main>
+    <div class="operator selector">
+      <p class="guide">대화에 나온 키워드를 선택하세요.</p>
+      <div id="topics" class="topics" aria-label="사진 키워드"></div>
+    </div>
+    <div id="stage" class="stage">
+      <div id="cover" class="cover">
+        <p class="eyebrow">장애인교원·관리자 사례 대담</p>
+        <h2>함께 일하는<br>학교의 이야기</h2>
+        <p class="cover-sub">신명중학교에서 함께 만든 변화</p>
+        <p class="people">정구헌 (전)교장 · 김헌용 교사</p>
+        <p class="event">사회 허유진 교수 · 2026. 11. 13.</p>
+      </div>
+      <div id="slide" hidden>
+        <div class="slide-heading"><div><p id="period" class="eyebrow"></p><h2 id="slide-title"></h2></div><p id="slide-count"></p></div>
+        <div id="photos" class="photos"></div>
+        <p id="slide-note" class="slide-note"></p>
+      </div>
+    </div>
+    <div class="operator controls">
+      <div class="tools"><button id="cover-button" aria-pressed="true">대담 표지</button><button id="clean">사진만 보기</button></div>
+      <div id="scene-buttons" class="scene-buttons" aria-label="묶음 안의 사진"></div>
+      <div class="tools"><button id="previous" aria-disabled="true">이전 사진</button><button id="next" aria-disabled="true">다음 사진</button></div>
+    </div>
+    <p id="status" class="status" role="status"></p>
+  </main>
+  <button id="restore" class="restore" hidden>조작 화면으로</button>
+  <div id="screen-tools" class="screen-tools" hidden><button id="screen-fullscreen">전체 화면</button></div>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <h2 id="help-title">대담 중 사진 보여주기</h2>
+    <ol>
+      <li>대화에 나온 키워드를 누르면 해당 사진이 바로 나타납니다.</li>
+      <li>같은 묶음의 다른 사진은 아래의 제목 버튼이나 이전·다음 사진으로 고릅니다.</li>
+      <li>사진을 누르면 크게 볼 수 있습니다. 수첩은 확대 후 스크롤하며 읽을 수 있습니다.</li>
+    </ol>
+    <h3>프로젝터와 노트북을 따로 사용할 때</h3>
+    <p>컴퓨터의 화면 설정을 ‘확장’으로 바꾼 뒤 ‘청중 화면 열기’를 누르세요. 새 창을 프로젝터 쪽으로 옮겨 전체 화면으로 전환하면, 이 창에서 고른 사진만 청중에게 보입니다. 두 창은 같은 브라우저에서 열어 두세요.</p>
+    <h3>화면 하나를 함께 볼 때</h3>
+    <p>키워드를 고른 뒤 ‘사진만 보기’를 누르세요. Esc 또는 ‘조작 화면으로’로 돌아올 수 있습니다.</p>
+    <h3>키보드</h3>
+    <p>Alt + 1~5: 키워드 선택 · Alt + ←/→: 묶음 안 이동 · Alt + 0: 대담 표지 · Esc: 확대 닫기 또는 조작 화면으로</p>
+    <p>인터넷이 없는 행사장에서는 내려받은 폴더의 index.html을 여세요. 사진 폴더도 함께 보관해야 합니다.</p>
+    <button id="close-help" autofocus>안내 닫기</button>
+  </dialog>
+  <dialog id="image-dialog" aria-labelledby="image-title">
+    <div class="image-toolbar"><h2 id="image-title"></h2><div class="tools"><button id="zoom" aria-pressed="false">크게 확대</button><button id="close-image" autofocus>사진 닫기</button></div></div>
+    <div id="image-scroll" class="image-scroll" tabindex="0" aria-label="확대한 사진, 방향키로 스크롤"><img id="large-image" alt=""></div>
+  </dialog>
+  <noscript>사진 선택 기능을 사용하려면 브라우저의 JavaScript를 켜 주세요.</noscript>
+</body>
+</html>
