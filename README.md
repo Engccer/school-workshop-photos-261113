@@ -2,6 +2,8 @@
 
 2026년 11월 13일 학교관리자 워크숍의 장애인교원·관리자 사례 대담 사진 자료다.
 
+[대담 사진 화면 열기](https://engccer.github.io/school-workshop-photos-261113/)
+
 ## 사용 방법
 
 1. `index.html`을 브라우저에서 연다.
